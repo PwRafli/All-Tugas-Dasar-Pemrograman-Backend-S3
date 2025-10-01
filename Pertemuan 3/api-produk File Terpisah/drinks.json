@@ -1,0 +1,6 @@
+{
+  "snacks": [
+    {"id": 1, "name": "Keripik Singkong", "price": 10000},
+    {"id": 2, "name": "Kacang Goreng", "price": 15000}
+  ]
+}
