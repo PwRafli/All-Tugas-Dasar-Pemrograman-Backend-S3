@@ -1,0 +1,1 @@
+Problem bearada di MySQL dan tidak bsia di baca pada bagian folder penyimpanan,folder projeck yang di buat berada di D kebaca nya di C
