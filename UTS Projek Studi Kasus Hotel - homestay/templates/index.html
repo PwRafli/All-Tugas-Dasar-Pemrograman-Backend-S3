@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home Stay Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Daftar Home Stay</h2>
+            <a href="{{ url_for('add_homestay_form') }}" class="btn btn-primary">Add New Home Stay</a>
+        </div>
+
+        <form class="mb-3" method="get" action="/">
+            <div class="input-group">
+                <input type="text" name="search" value="{{ search_query }}" class="form-control"
+                    placeholder="Search by home stay name">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Price/Night</th>
+                    <th>Guests</th>
+                    <th>Available</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for homestay in hotels %}
+                <tr>
+                    <td>
+                        {% if homestay[7] %}
+                        <img src="{{ url_for('uploaded_file', filename=homestay[7]) }}"
+                            alt="Photo of {{ homestay[1] }}">
+                        {% else %}
+                        <img src="https://placehold.co/80x60?text=No+Image" alt="No Photo Available">
+                        {% endif %}
+                    </td>
+                    <td>{{ homestay[1] }}</td>
+                    <td>Rp {{ homestay[3] }}</td>
+                    <td>{{ homestay[4] }}</td>
+                    <td>
+                        {% if homestay[6] %}
+                        <span class="badge bg-success">Yes</span>
+                        {% else %}
+                        <span class="badge bg-danger">No</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('edit_homestay_form', id=homestay[0]) }}"
+                            class="btn btn-sm btn-info">Edit</a>
+                        <a href="{{ url_for('delete_homestay', id=homestay[0]) }}" class="btn btn-sm btn-danger"
+                            onclick="return confirm('Are you sure?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% if page > 1 %}
+                <li class="page-item"><a class="page-link"
+                        href="?search={{ search_query }}&page={{ page - 1 }}">Previous</a></li>
+                {% endif %}
+                {% for p in range(1, total_pages + 1) %}
+                <li class="page-item{% if p == page %} active{% endif %}">
+                    <a class="page-link" href="?search={{ search_query }}&page={{ p }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+                {% if page < total_pages %} <li class="page-item"><a class="page-link"
+                        href="?search={{ search_query }}&page={{ page + 1 }}">Next</a></li>
+                    {% endif %}
+            </ul>
+        </nav>
+    </div>
+</body>
+
+</html>
