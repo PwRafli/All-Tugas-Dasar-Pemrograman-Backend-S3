@@ -1,0 +1,49 @@
+Pembuatan ini database MySQL UTS Hotel/Homestay
+
+USE datahotel_db;
+
+
+CREATE TABLE Hotels (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price INT NOT NULL,
+    guests INT,
+    amenities VARCHAR(255),
+    available BOOLEAN DEFAULT TRUE
+);
+
+mysql> use datahotel_db;
+Database changed
+mysql> SHOW COLUMNS FROM Hotels;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int          | NO   | PRI | NULL    | auto_increment |
+| name        | varchar(100) | NO   |     | NULL    |                |
+| description | text         | YES  |     | NULL    |                |
+| price       | int          | NO   |     | NULL    |                |
+| guests      | int          | YES  |     | NULL    |                |
+| amenities   | varchar(255) | YES  |     | NULL    |                |
+| available   | tinyint(1)   | YES  |     | 1       |                |
+| filename    | varchar(255) | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+8 rows in set (0.03 sec)
+
+mysql> DESCRIBE Hotels;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int          | NO   | PRI | NULL    | auto_increment |
+| name        | varchar(100) | NO   |     | NULL    |                |
+| description | text         | YES  |     | NULL    |                |
+| price       | int          | NO   |     | NULL    |                |
+| guests      | int          | YES  |     | NULL    |                |
+| amenities   | varchar(255) | YES  |     | NULL    |                |
+| available   | tinyint(1)   | YES  |     | 1       |                |
+| filename    | varchar(255) | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+8 rows in set (0.02 sec)
+
+mysql> SELECT * FROM Hotels;
+Empty set (0.05 sec)
