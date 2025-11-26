@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Barang UMKM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container my-5">
+        <div class="card shadow-sm p-4">
+            <h1 class="text-center display-4 mb-4">Daftar Barang UMKM</h1>
+
+            <div class="d-flex justify-content-between mb-3">
+                <a href="{{ url_for('add') }}" class="btn btn-add">Tambah Barang</a>
+                <small class="text-muted">Total: {{ items|length }} item</small>
+            </div>
+
+            <table class="table table-bordered table-striped text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Kode</th>
+                        <th>Nama</th>
+                        <th>Harga</th>
+                        <th>Stok</th>
+                        <th style="width: 160px;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.kode }}</td>
+                        <td>{{ item.nama }}</td>
+                        <td>Rp {{ item.harga | format_harga }}</td>
+                        <td>{{ item.jumlah }}</td>
+                        <td>
+                            <a href="{{ url_for('edit', id=item._id) }}" class="btn btn-edit btn-sm">Update</a>
+
+                            <form action="{{ url_for('delete', id=item._id) }}" method="POST"
+                                style="display:inline-block" onsubmit="return confirm('Hapus data ini?')">
+                                <button class="btn btn-danger-custom btn-sm">
+                                    Hapus
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</body>
+
+</html>
