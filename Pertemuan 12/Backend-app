@@ -1,0 +1,16 @@
+Backend-app/
+│
+├── images/
+│   ├── kaoshitam.png
+│   ├── sepatukeren.png
+│   └── topitrendy.png
+│
+├── node_modules/
+│   ├── express/
+│   ├── mysql2/
+│   ├── cors/
+│   └── ...
+│
+├── package.json
+├── package-lock.json
+└── server.js
